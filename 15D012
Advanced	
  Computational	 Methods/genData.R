@@ -58,24 +58,23 @@ genData <- function(class1 =10, class2 =10, save = TRUE, export=TRUE,
   if(export==TRUE)
     {
     # Save ggplot graph
-      p01 <- ggplot(data = sim.dat, 
-             aes(x = V1, y = V2, colour= Category)) + 
+      p01 <- ggplot( data = sim.dat, aes( x = V1, y = V2, colour = Category)) + 
              geom_point() +
              xlab("X") +
              ylab("Y") +
              theme_bw()
     # Export object
-      ggsave(p01,file="benchmark.pdf")
+      ggsave(p01,file="dataPlot.pdf")
     }
   return(sim.dat)
 }
 
 # Generate some example dataset
 exData <-genData(50, 50,TRUE,TRUE,
-           1, 2, 1,  c( 0,  0), 100, diag(2),
+           1, 1, 1,  c( 0,  0),   1, diag(2),
            1, 1, 1,  c(15, 15), 100, diag(2),
-           1, 1, 1,  c(10, 10), 100, diag(2),
-           1, 1, 1,  c(20, 20), 100, diag(2)
+           1, 1, 1,  c(10, 10), 150, diag(2),
+           1, 1, 1,  c(20, 20), 200, diag(2)
            )
 
 ###################################################################################################

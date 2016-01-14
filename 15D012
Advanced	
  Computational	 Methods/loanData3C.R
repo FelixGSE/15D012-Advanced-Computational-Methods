@@ -8,7 +8,7 @@
 # Type:         Problemset 1 - Exercise 2
 
 ###################################################################################################
-### 0. Praeamble
+### Praeamble
 ###################################################################################################
 
 ### Clear workspace
@@ -118,10 +118,10 @@ l01 <- ((W[1,2] - W[1,1]) / (W[3,1] - W[3,2])) + ((W[2,2] - W[2,1]) / (W[3,1] - 
 l02 <- ((W[1,2] - W[1,3]) / (W[3,3] - W[3,2])) + ((W[2,2] - W[2,3]) / (W[3,3] - W[3,2])) * x
 l03 <- ((W[1,1] - W[1,3]) / (W[3,3] - W[3,1])) + ((W[2,1] - W[2,3]) / (W[3,3] - W[3,1])) * x 
 
-# Set up boundaries
-b01 <- data.frame(PIratio=x, solvency=l01, status=rep("1 vs. 2", length(x)))
-b02 <- data.frame(PIratio=x, solvency=l02, status=rep("2 vs. 3", length(x)))
-b03 <- data.frame(PIratio=x, solvency=l03, status=rep("3 vs. 1", length(x)))
+# Set up data frame with line data
+b01 <- data.frame(PIratio=x, solvency=l01, status=rep("Boundary 1", length(x)))
+b02 <- data.frame(PIratio=x, solvency=l02, status=rep("Boundary 2", length(x)))
+b03 <- data.frame(PIratio=x, solvency=l03, status=rep("Boundary 3", length(x)))
 
 # Find cut position
 X01   <- round(cbind(1,x,l01) %*% W,8)
@@ -137,17 +137,21 @@ pos03 <- X03[,1] > X03[,2]
 if(pos03[1] == TRUE ){ rangeb03 <- 1:sum(pos03) } else { rangeb03 <- (noObs-sum(pos03)):noObs }
 
 # Plot result
-#pdf("discFunction3C.pdf")
-  ggplot(data = loanDf, 
-         aes(x = solvency, y = PIratio, colour = status, fill = status) ) + 
-    geom_point() +
-    xlab("Solvency") +
-    ylab("PI ratio") +
-    theme_bw() +
-    geom_line( data = b01[rangeb01,]) +
-    geom_line( data = b02[rangeb02,]) + 
-    geom_line( data = b03[rangeb03,]) 
-#dev.off()
+plot01 <- ggplot(data = loanDf, aes( x = solvency, y = PIratio, colour = status, fill = status ) ) + 
+            geom_point() +
+            xlab("Solvency") +
+            ylab("PI ratio") +
+            theme_bw() +
+            geom_line( data = b01[rangeb01,]) +
+            geom_line( data = b02[rangeb02,]) + 
+            geom_line( data = b03[rangeb03,]) +
+            scale_color_manual("status", 
+                                values = c("Boundary 1" = "black" , "Boundary 2" = "dodgerblue4" , "Boundary 3" = "coral",
+                                            "Approved"  =  "seagreen" , "Denied"     = "darkred" , "Undecided"  = "grey"
+                                          )
+                              )
+# Save plot
+ggsave( plot01,file="discFunction3C.pdf" )
 
 ###################################################################################################
 ###### End CODE # End CODE # End CODE # End CODE # End CODE # End CODE # End CODE # End CODE ######
