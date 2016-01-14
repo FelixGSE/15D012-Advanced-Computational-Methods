@@ -92,10 +92,10 @@ X <- as.matrix(cbind(intercept=1, loanDf[,c("PIratio", "solvency")]))
 Y <- as.matrix(loanDf[,c('target1','target2','target3')])
 W <- solve(t(X)%*%X) %*% t(X) %*% Y
 
-# Compute predictions
+# Compute predicted values
 predictions <- X %*% W
 
-# classify according to the argmax criterion
+# classify data and create corresponding labels
 result  <- predictions==apply(predictions, 1, max)
 labels  <- c("Approved","Denied","Undecided")
 predict <- rep(NA,nrow(result))
@@ -105,13 +105,13 @@ for(i in 1:nrow(result)){
   predict[i] <- labels[pos]
 }
  
-# Prepare final dataframe
+# Prepare final dataframe - collect relevant columns
 loanDf <- cbind(loanDf[,c('PIratio','solvency','status')],predicted=predict)
 
 # Export dataset
 write.table(loanDf, file = "predictions.csv",row.names=FALSE, na="",col.names=TRUE, sep=";") 
 
-### Step 3: 
+### Step 3: Plot data with decision boundaries
 
 # Compute discriminant lines (see Bishop:)
 l01 <- ((W[1,2] - W[1,1]) / (W[3,1] - W[3,2])) + ((W[2,2] - W[2,1]) / (W[3,1] - W[3,2])) * x
