@@ -12,7 +12,7 @@
 ###################################################################################################
 
 ### Clear workspace
-rm(list = ls())
+#rm(list = ls())
 
 ### Load Packages 
 if (!require("mvtnorm")) install.packages("mvtnorm"); library(mvtnorm)
