@@ -69,7 +69,7 @@ genData <- function(class1 =10, class2 =10, save = TRUE, export=TRUE,
   return(sim.dat)
 }
 
-# Generate some example dataset
+# Generate some simple example dataset
 exData <-genData(50, 50,TRUE,TRUE,
            1, 1, 1,  c( 0,  0),   1, diag(2),
            1, 1, 1,  c(15, 15), 100, diag(2),

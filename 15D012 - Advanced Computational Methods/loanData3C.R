@@ -104,9 +104,10 @@ for(i in 1:nrow(result)){
   pos <- as.numeric(which(result[i,] == TRUE))
   predict[i] <- labels[pos]
 }
- 
+
 # Prepare final dataframe - collect relevant columns
-loanDf <- cbind(loanDf[,c('PIratio','solvency','status')],predicted=predict)
+colnames(predictions) <- c("Approved","Denied","Undecided")
+loanDf <- cbind(loanDf[,c('PIratio','solvency','status')],predictions,"Predicted label"=predict)
 
 # Export dataset
 write.table(loanDf, file = "predictions.csv",row.names=FALSE, na="",col.names=TRUE, sep=";") 
@@ -146,8 +147,8 @@ plot01 <- ggplot(data = loanDf, aes( x = solvency, y = PIratio, colour = status,
             geom_line( data = b02[rangeb02,]) + 
             geom_line( data = b03[rangeb03,]) +
             scale_color_manual("status", 
-                                values = c("Boundary 1" = "black" , "Boundary 2" = "dodgerblue4" , "Boundary 3" = "coral",
-                                            "Approved"  =  "seagreen" , "Denied"     = "darkred" , "Undecided"  = "grey"
+                                values = c("Boundary 1" = "black" , "Boundary 2" = "blue" , "Boundary 3" = "orange",
+                                            "Approved"  =  "green" , "Denied"     = "red" , "Undecided"  = "grey"
                                           )
                               )
 # Save plot
