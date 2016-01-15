@@ -52,7 +52,7 @@ genData <- function(class1 =10, class2 =10, save = TRUE, export=TRUE,
   # OPTION 1: Save data as CSV - TRUE by default
   if(save==TRUE) 
     { 
-    write.table(sim.dat, file = "benchmark.csv",row.names=FALSE, na="",col.names=TRUE, sep=";") 
+    write.table(sim.dat, file = "dataset.csv",row.names=FALSE, na="",col.names=TRUE, sep=";") 
     }
   # OPTION 2: Save plot of generated data - TRUE by default
   if(export==TRUE)
