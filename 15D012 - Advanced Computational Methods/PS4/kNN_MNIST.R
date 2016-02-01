@@ -2,6 +2,9 @@
 ####################   Problemset 4.1.3 - k-NN algorithm    ####################
 ################################################################################
 
+# Barcelona graduate school of economics
+
+# Programm:		M.S. Data Science
 # Author:       (c) Felix Gutmann
 # Course:       15D012 - Advanced Computational Methods
 # Last update:  04.02.16
@@ -17,13 +20,12 @@
 rm(list = ls())
 
 ### Set working directory
-#setwd("/home/felix/Downloads")
+setwd("/home/felix/Downloads")
 
 ### Load packages
 if (!require("class")) install.packages("class"); library(class)
 
 ### Load data (training and test data)
-
 training <- read.csv("MNIST_training.csv",header=FALSE)
 test 	 <- read.csv("MNIST_test.csv",header=FALSE)
 

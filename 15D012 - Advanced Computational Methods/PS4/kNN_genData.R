@@ -2,8 +2,11 @@
 ####################   Problemset 4.1.2 - k-NN algorithm    ####################
 ################################################################################
 
+# Barcelona graduate school of economics
+
+# Programm:		M.S. Data Science
 # Author:       (c) Felix Gutmann
-# Course:       15D012 - Advanced Computational Methods
+# Course:       15D012 - Advanced Computational Methods (Term 2)
 # Last update:  04.02.16
 
 # Content:     	This R-file creates uses the function created in the kNN.R file
@@ -29,6 +32,7 @@ rm(list = ls())
 ### Load Packages 
 if (!require("stats")) 	 install.packages("stats");   library(stats)
 if (!require("mvtnorm")) install.packages("mvtnorm"); library(mvtnorm)
+if (!require("assert"))  install.packages("assert");  library(assert)
 
 ### Initialize auxilliary functions
 
@@ -55,6 +59,11 @@ if (!require("mvtnorm")) install.packages("mvtnorm"); library(mvtnorm)
 
     # kNN - classification function
     kNN <- function( features, labels , k = 3, p = 2 ){ 
+    	# Check correct input formats
+		assert_that(is.data.frame(features) || is.matrix(features))
+	  	assert_that(is.vector(labels))
+	  	not_empty(features)
+	  	not_empty(labels)
         # Count number of points
         N      <- nrow(features)
         # Define arguments for distance method

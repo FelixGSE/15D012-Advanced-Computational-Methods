@@ -2,6 +2,9 @@
 ####################   Problemset 4.1.1 - k-NN algorithm    ####################
 ################################################################################
 
+# Barcelona graduate school of economics
+
+# Programm:		M.S. Data Science
 # Author:       (c) Felix Gutmann
 # Course:       15D012 - Advanced Computational Methods
 # Last update:  04.02.16
@@ -60,6 +63,11 @@ if (!require("mvtnorm")) install.packages("mvtnorm"); library(mvtnorm)
 ################################################################################
 
 kNN <- function( features, labels , k = 3, p = 2 ){ 
+	# Check correct input formats
+	assert_that(is.data.frame(features) || is.matrix(features))
+  	assert_that(is.vector(labels))
+  	not_empty(features)
+  	not_empty(labels)
 	# Count number of points
 	N 	   <- nrow(features)
 	# Define arguments for distance method
