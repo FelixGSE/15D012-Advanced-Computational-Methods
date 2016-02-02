@@ -30,9 +30,10 @@ rm(list = ls())
 #setwd("/home/felix/Downloads")
 
 ### Load Packages 
-if (!require("stats")) 	 install.packages("stats");   library(stats)
-if (!require("mvtnorm")) install.packages("mvtnorm"); library(mvtnorm)
-if (!require("assert"))  install.packages("assert");  library(assert)
+if (!require("stats")) 	 	install.packages("stats");   	library(stats)
+if (!require("mvtnorm")) 	install.packages("mvtnorm"); 	library(mvtnorm)
+if (!require("assertthat")) install.packages("assertthat"); library(assertthat)
+if (!require("ggplot2")) 	install.packages("ggplot2"); 	library(ggplot2)
 
 ### Initialize auxilliary functions
 
@@ -57,42 +58,81 @@ if (!require("assert"))  install.packages("assert");  library(assert)
       ux[which.max(tabulate(match(x, ux)))]
     }
 
-    # kNN - classification function
-    kNN <- function( features, labels , k = 3, p = 2 ){ 
-    	# Check correct input formats
-		assert_that(is.data.frame(features) || is.matrix(features))
-	  	assert_that(is.vector(labels))
-	  	not_empty(features)
-	  	not_empty(labels)
-        # Count number of points
-        N      <- nrow(features)
-        # Define arguments for distance method
-        method <- c("manhattan","euclidean","maximum")
-        # Convert function input to 
-        if(p == Inf){
-             m <- method[3] } else {
-             m <- method[p]
-        }
-        # Compute distance matrix
-        DM  <- as.matrix(dist(features, method = m , diag = FALSE, upper = TRUE) )
-        # Compute positions for closest distance
-        pos <- lapply(as.data.frame(DM),order)
-        # Get predictions
-        prediction <- lapply(1:N,
-                        function(i){ 
-                                    temp <- labels[ pos[[i]] ][2:(k+1)] 
-                                    mod  <- mode(temp)
-                                    ep   <- length(which(temp==mod)) /length (temp)
-                                    return(c(mod,ep))
-                                    }
-                            )
-        # Unlist predictions and store it in a matrix
-        con     <- matrix(unlist(prediction), ncol = 2, byrow = TRUE)
-        # Prepare output
-        output  <- list(predLabels = con[,1] , prob = con[,2] )
-        # Return predictions and corresponding probabilities
-        return(output)
-    }
+
+	kNN <- function( features, test = NULL , labels , k = 3, p = 2 , predict = FALSE ){
+		if( predict == FALSE ) {
+			# Check correct input formats
+			assert_that(is.data.frame(features) || is.matrix(features))
+		  	assert_that(is.vector(labels))
+		  	not_empty(features)
+		  	not_empty(labels)
+			# Count number of points
+			N 	   <- nrow(features)
+			# Define arguments for distance method
+			method <- c("manhattan","euclidean","maximum")
+			# Convert function input to 
+			if(p == Inf){
+				 m <- method[3] } else {
+				 m <- method[p]
+			}
+			# Compute distance matrix
+			DM 	<- as.matrix(dist(features, method = m , diag = FALSE, upper = TRUE) )
+			# Compute positions for closest distance
+			pos <- lapply(as.data.frame(DM),order)
+			# Get predictions
+			prediction <- lapply(1:N,
+							function(i){ 
+										temp <- labels[ pos[[i]] ][2:(k+1)] 
+										mod  <- mode(temp)
+										ep   <- length(which(temp==mod)) /length (temp)
+										return(c(mod,ep))
+										}
+								)
+			# Unlist predictions and store it in a matrix
+			con 	<- matrix(unlist(prediction), ncol = 2, byrow = TRUE)
+			# Prepare output
+			output 	<- list(predLabels = con[,1] , prob = con[,2] )
+			# Return predictions and corresponding probabilities
+			return(output)
+		} else if ( predict == TRUE ){ 
+			# Check correct input formats
+			assert_that(is.data.frame(features) || is.matrix(features))
+			assert_that(is.data.frame(test) 	|| is.matrix(test))
+		  	assert_that(is.vector(labels))
+		  	not_empty(features)
+		  	not_empty(labels)
+			# Count number of points
+			M 	   <- rbind(features,test)
+			N 	   <- nrow(M)
+			# Define arguments for distance method
+			method <- c("manhattan","euclidean","maximum")
+			# Convert function input to 
+			if(p == Inf){
+				 m <- method[3] } else {
+				 m <- method[p]
+			}
+			# Compute distance matrix
+			DM 	 <- as.matrix(dist(M, method = m , diag = FALSE, upper = TRUE) )
+			# Compute positions for closest distance
+			pos  <- t(apply(DM,1,order))[(nrow(features)+1):nrow(DM),]
+			lab  <- 1:length(labels)
+			# Get predictions
+			prediction <- lapply(1:nrow(pos),
+							function(i){ 
+								temp <- labels[ intersect(pos[i,], lab) ]   [2:(k+1)]
+								mod  <- mode(temp)
+								ep   <- length(which(temp==mod)) /length (temp)
+								return(c(mod,ep))
+										}
+								)
+			# Unlist predictions and store it in a matrix
+			con 	<- matrix(unlist(prediction), ncol = 2, byrow = TRUE)
+			# Prepare output
+			output 	<- list(predLabels = con[,1] , prob = con[,2] )
+			# Return predictions and corresponding probabilities
+			return(output)
+		}
+}
 
 ################################################################################
 # Section 1: Initialize function to create test data
@@ -134,7 +174,8 @@ X <- data[c("x1","x2")]
 Y <- data$y
 
 # Classify data with 5-NN and euclidian distance
-classification <- kNN(X,Y,5,2)
+classification <- kNN( features = X, test = NULL , labels = Y,
+							  k = 5, 	p = 2,	  predict = FALSE )
 
 # Prepare output
 output <- as.data.frame(cbind(X,Y,classification))
@@ -143,6 +184,26 @@ output <- as.data.frame(cbind(X,Y,classification))
 write.table(output, file = "predictions.csv",row.names=FALSE, col.names=TRUE) 
 
 # Plot data and decision boundaries
+
+train <- genSample()
+X 	  <- train[,1:2]
+Y 	  <- train$y
+x 	  <- seq( min(train$x1), max(train$x1), length = 50)
+y 	  <- seq( min(train$x2), max(train$x2), length = 50)
+n 	  <- length(x)
+test  <- expand.grid( x1 = x, x2 = y )
+
+
+classification <- kNN( features = X , test = test , labels = Y, 
+							  k = 15, 	 p = 2 ,   predict = TRUE )
+
+conversion <- ifelse(classification$predLabels == 0 , -1 , 1 )
+
+mat <- transform( melt( matrix( conversion, n ) ), x = x[X1], y= y[X2] )
+
+ggplot(mat, aes( x , y , z = value)) + 
+  geom_contour() + 
+  geom_point(aes( x1 , x2 , colour = y, z = NULL ), data=train )
 
 ################################################################################
 

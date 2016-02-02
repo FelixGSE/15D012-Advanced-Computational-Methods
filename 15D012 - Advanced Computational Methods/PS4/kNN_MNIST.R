@@ -20,15 +20,14 @@
 rm(list = ls())
 
 ### Set working directory
-setwd("/home/felix/Downloads")
+#setwd("/home/felix/Downloads")
 
 ### Load packages
 if (!require("class")) install.packages("class"); library(class)
 
 ### Load data (training and test data)
-training <- read.csv("MNIST_training.csv",header=FALSE)
-test 	 <- read.csv("MNIST_test.csv",header=FALSE)
-
+training <- read.csv( "MNIST_training.csv", header = FALSE )
+test 	 <- read.csv( "MNIST_test.csv",	   header = FALSE )
 
 ################################################################################
 # Section 1: Initialize function to create test data
