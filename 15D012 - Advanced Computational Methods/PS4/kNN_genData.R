@@ -10,16 +10,16 @@
 # Content:     	This R-file uses the function created in the kNN.R file
 #               to predict some test data. This file contains 3 main sections
 #
-#				The Preamble loads/installs necessary packages, initializes 
-#  				functions and personal styling options (color set)
+#               The Preamble loads/installs necessary packages, initializes 
+#               functions and personal styling options (color set)
 #
-#	 			Section 1 initializes a function to create a multivaria test 
-#	 			data set. By default it creates two classes with bimodal
-#	 			diagonal arranged outcomes, which are not linearly separable 
+#               Section 1 initializes a function to create a multivaria test 
+#               data set. By default it creates two classes with bimodal
+#               diagonal arranged outcomes, which are not linearly separable 
 #	 		
-#	 			Section 2 performs the function on a created data set and 
-#	 			stores a CSV file with predictions and a graphical illustration
-#				of the corresponding decision boundaries.
+#               Section 2 performs the function on a created data set and 
+#               stores a CSV file with predictions and a graphical illustration
+#               of the corresponding decision boundaries.
 
 ################################################################################
 ### Preamble
