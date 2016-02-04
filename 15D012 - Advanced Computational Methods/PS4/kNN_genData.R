@@ -84,7 +84,7 @@ if (!require("reshape")) 	install.packages("reshape"); 	library(reshape)
 			pos <- t(apply(DM,1,order))
 			# Get predictions
 			prediction <- lapply(1:nrow(pos),
-							function(i){ 
+                               function(i){ 
                                 temp <- labels[ pos[i,] ][2:(k+1)] 
                                 mod  <- mode(temp)
                                 ep   <- length(which(temp==mod)) / length (temp)
@@ -121,7 +121,7 @@ if (!require("reshape")) 	install.packages("reshape"); 	library(reshape)
 			lab  <- 1:length(labels)
 			# Get predictions
 			prediction <- lapply(1:nrow(pos),
-							function(i){ 
+                               function(i){ 
                                 temp <- labels[ intersect(pos[i,], lab) ]   [2:(k+1)]
                                 mod  <- mode(temp)
                                 ep   <- length(which(temp==mod)) / length (temp)

@@ -3,7 +3,7 @@
 ################################################################################
 
 # Author:       Felix Gutmann
-# Programm:	    Barcelona graduate school of economics - M.S. Data Science 
+# Programm:     Barcelona graduate school of economics - M.S. Data Science 
 # Course:       15D012 - Advanced Computational Methods (Term 2)
 # Last update:  04.02.16
 
@@ -14,13 +14,13 @@
 # 
 #               Function arguments: 
 # 
-#               1. features:		Matrix or data frame with training data.
-#               2. test:			Test data.
-#               2. labels:			A vector with training labels.
-#               3. k:				Parameter for the number of NN.
-#               4. p:				Distance meassure (1=L1 , 2=L2 , Inf=max).
-#               5. predict:			Logical (def. = FALSE) / Has to be TRUE if
-#									there is an unlabeled test data set. 
+#               1. features:        Matrix or data frame with training data.
+#               2. test:            Test data.
+#               2. labels:          A vector with training labels.
+#               3. k:               Parameter for the number of NN.
+#               4. p:               Distance meassure (1=L1 , 2=L2 , Inf=max).
+#               5. predict:         Logical (def. = FALSE) / Has to be TRUE if
+#                                   there is an unlabeled test data set. 
 
 ################################################################################
 ### Preamble
@@ -71,7 +71,7 @@ if (!require("assertthat")) install.packages("assertthat"); library(assertthat)
 			pos <- t(apply(DM,1,order))
 			# Get predictions
 			prediction <- lapply(1:nrow(pos),
-							function(i){ 
+                               function(i){ 
                                 temp <- labels[ pos[i,] ][2:(k+1)] 
                                 mod  <- mode(temp)
                                 ep   <- length(which(temp==mod)) / length (temp)
@@ -108,7 +108,7 @@ if (!require("assertthat")) install.packages("assertthat"); library(assertthat)
 			lab  <- 1:length(labels)
 			# Get predictions
 			prediction <- lapply(1:nrow(pos),
-							function(i){ 
+                               function(i){ 
                                 temp <- labels[ intersect(pos[i,], lab) ]   [2:(k+1)]
                                 mod  <- mode(temp)
                                 ep   <- length(which(temp==mod)) / length (temp)
