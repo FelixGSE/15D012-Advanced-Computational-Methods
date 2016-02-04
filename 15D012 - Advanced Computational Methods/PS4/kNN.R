@@ -3,23 +3,23 @@
 ################################################################################
 
 # Author:       Felix Gutmann
-# Programm:		Barcelona graduate school of economics - M.S. Data Science 
+# Programm:	    Barcelona graduate school of economics - M.S. Data Science 
 # Course:       15D012 - Advanced Computational Methods (Term 2)
 # Last update:  04.02.16
 
-# Content:     	This R-file creates a function performing the k-nearest-
-# 				neighbhor algorithm on a given input data set. 
-# 				The function returns a list with predicted labels and 
-# 				corresponding probabilities.
+# Content:      This R-file creates a function performing the k-nearest-
+#               neighbhor algorithm on a given input data set. 
+#               The function returns a list with predicted labels and 
+#               corresponding probabilities.
 # 
-# 				Function arguments: 
+#               Function arguments: 
 # 
-# 				1. features:		Matrix or data frame with training data.
-#				2. test:			Test data.
-# 				2. labels:			A vector with training labels.
-# 				3. k:				Parameter for the number of NN.
-# 				4. p:				Distance meassure (1=L1 , 2=L2 , Inf=max).
-# 				5. predict:			Logical (def. = FALSE) / Has to be TRUE if
+#               1. features:		Matrix or data frame with training data.
+#               2. test:			Test data.
+#               2. labels:			A vector with training labels.
+#               3. k:				Parameter for the number of NN.
+#               4. p:				Distance meassure (1=L1 , 2=L2 , Inf=max).
+#               5. predict:			Logical (def. = FALSE) / Has to be TRUE if
 #									there is an unlabeled test data set. 
 
 ################################################################################
@@ -72,12 +72,12 @@ if (!require("assertthat")) install.packages("assertthat"); library(assertthat)
 			# Get predictions
 			prediction <- lapply(1:nrow(pos),
 							function(i){ 
-								temp <- labels[ pos[i,] ][2:(k+1)] 
-								mod  <- mode(temp)
-								ep   <- length(which(temp==mod)) / length (temp)
-								return(c(mod,ep))
-								 }
-								)
+                                temp <- labels[ pos[i,] ][2:(k+1)] 
+                                mod  <- mode(temp)
+                                ep   <- length(which(temp==mod)) / length (temp)
+                                return(c(mod,ep))
+                                 }
+                                )
 			# Unlist predictions and store it in a matrix
 			con 	<- matrix(unlist(prediction), ncol = 2, byrow = TRUE)
 			# Prepare output
@@ -109,12 +109,12 @@ if (!require("assertthat")) install.packages("assertthat"); library(assertthat)
 			# Get predictions
 			prediction <- lapply(1:nrow(pos),
 							function(i){ 
-								temp <- labels[ intersect(pos[i,], lab) ]   [2:(k+1)]
-								mod  <- mode(temp)
-								ep   <- length(which(temp==mod)) / length (temp)
-								return(c(mod,ep))
-								}
-								)
+                                temp <- labels[ intersect(pos[i,], lab) ]   [2:(k+1)]
+                                mod  <- mode(temp)
+                                ep   <- length(which(temp==mod)) / length (temp)
+                                return(c(mod,ep))
+                                 }
+                                )
 			# Unlist predictions and store it in a matrix
 			con 	<- matrix(unlist(prediction), ncol = 2, byrow = TRUE)
 			# Prepare output

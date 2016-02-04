@@ -85,12 +85,12 @@ if (!require("reshape")) 	install.packages("reshape"); 	library(reshape)
 			# Get predictions
 			prediction <- lapply(1:nrow(pos),
 							function(i){ 
-								temp <- labels[ pos[i,] ][2:(k+1)] 
-								mod  <- mode(temp)
-								ep   <- length(which(temp==mod)) / length (temp)
-								return(c(mod,ep))
-								 }
-								)
+                                temp <- labels[ pos[i,] ][2:(k+1)] 
+                                mod  <- mode(temp)
+                                ep   <- length(which(temp==mod)) / length (temp)
+                                return(c(mod,ep))
+                                 }
+                                )
 			# Unlist predictions and store it in a matrix
 			con 	<- matrix(unlist(prediction), ncol = 2, byrow = TRUE)
 			# Prepare output
@@ -122,12 +122,12 @@ if (!require("reshape")) 	install.packages("reshape"); 	library(reshape)
 			# Get predictions
 			prediction <- lapply(1:nrow(pos),
 							function(i){ 
-								temp <- labels[ intersect(pos[i,], lab) ]   [2:(k+1)]
-								mod  <- mode(temp)
-								ep   <- length(which(temp==mod)) / length (temp)
-								return(c(mod,ep))
-								}
-								)
+                                temp <- labels[ intersect(pos[i,], lab) ]   [2:(k+1)]
+                                mod  <- mode(temp)
+                                ep   <- length(which(temp==mod)) / length (temp)
+                                return(c(mod,ep))
+                                 }
+                                )
 			# Unlist predictions and store it in a matrix
 			con 	<- matrix(unlist(prediction), ncol = 2, byrow = TRUE)
 			# Prepare output
@@ -211,7 +211,7 @@ test  <- expand.grid( x1 = x, x2 = y )
  
 # Run  classification on grid data 
 classification <- kNN( features = X , test = test , labels = Y, 
-							  k = 15, 	 p = 2 ,   predict = TRUE )
+                              k = 15,    p = 2 ,   predict = TRUE )
 
 # Transform data for ggplot argument input
 conversion <- ifelse(classification$predLabels == 0 , -1 , 1 )

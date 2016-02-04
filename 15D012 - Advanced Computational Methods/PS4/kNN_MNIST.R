@@ -3,12 +3,12 @@
 ################################################################################
 
 # Author:       Felix Gutmann
-# Programm:		Barcelona graduate school of economics - M.S. Data Science 
+# Programm:     Barcelona graduate school of economics - M.S. Data Science 
 # Course:       15D012 - Advanced Computational Methods (Term 2)
 # Last update:  04.02.16
 
-# Content:     	This R-file uses k-NN for classification of the MNIST
-#				data set. The applied knn() function comes from the class package.
+# Content:      This R-file uses k-NN for classification of the MNIST
+#               data set. The applied knn() function comes from the class package.
 
 ################################################################################
 ### Preamble
