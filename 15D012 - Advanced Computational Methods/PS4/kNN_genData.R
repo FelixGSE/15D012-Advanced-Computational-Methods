@@ -3,13 +3,13 @@
 ################################################################################
 
 # Author:       Felix Gutmann
-# Programm:		Barcelona graduate school of economics - M.S. Data Science 
+# Programm:     Barcelona graduate school of economics - M.S. Data Science 
 # Course:       15D012 - Advanced Computational Methods (Term 2)
 # Last update:  04.02.16
 
 # Content:     	This R-file uses the function created in the kNN.R file
 #               to predict some test data. This file contains 3 main sections
-#	
+#
 #				The Preamble loads/installs necessary packages, initializes 
 #  				functions and personal styling options (color set)
 #
