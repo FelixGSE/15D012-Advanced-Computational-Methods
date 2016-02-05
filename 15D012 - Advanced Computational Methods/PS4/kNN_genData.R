@@ -192,7 +192,7 @@ Y <- train$y
 
 # Classify data with 5-NN and euclidian distance
 classification <- kNN( features = X, test = NULL , labels = Y,
-							  k = 5, 	p = 2,	  predict = FALSE )
+                              k = 5,    p = 2,    predict = FALSE )
 
 # Prepare output
 output <- as.data.frame(cbind(X,Y,classification))
