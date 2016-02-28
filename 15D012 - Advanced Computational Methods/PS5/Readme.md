@@ -8,10 +8,10 @@ DETAILED EXPLANATION
 
 The function is not fully developed at this point. There are the following main issues:
 
-1) Function can NOT deal with formulas 
-2) Function can NOT predict a test data set
-3) Function can NOT handle desired function arguments
-4) Function does NOT use the same arguments
+	1) Function can NOT deal with formulas 
+	2) Function can NOT predict a test data set
+	3) Function can NOT handle desired function arguments
+	4) Function does NOT use the same arguments
 
 Right now the function manages to produce RECURSIVELY
 a decision tree based on an input data set and a response 
@@ -30,8 +30,8 @@ The function outputs a list containing information about the
 tree structure. In order to make the output more readable one
 could use the following PSEUDO EXAMPLE structure:
 
-tree 	  <- cTree( data = data, y = "outcome")
-structure <- as.data.frame( unlist( tree ) )
+	tree 	  <- cTree( data = data, y = "outcome")
+	structure <- as.data.frame( unlist( tree ) )
 
 SOURCE:
 
