@@ -1,5 +1,14 @@
 ################################################################################
+####################   Problemset 5 - Classification Tree  #####################
+################################################################################
 
+# Author:       Felix Gutmann
+# Programm:     Barcelona graduate school of economics - M.S. Data Science 
+# Course:       15D012 - Advanced Computational Methods (Term 2)
+# Last update:  28.02.2016
+
+################################################################################
+### Preamble
 ################################################################################
 
 ### Clear workspace
@@ -7,7 +16,7 @@
 
 ### Load packages
 
-### Functions
+### Auxilliary Functions
   
   # Split data 
   splitData <- function( data , col , threshold ){
@@ -118,7 +127,7 @@ cTree <-function( data, y ){
     # No further gain
   } else {
     # Compute probablity
-    nodeProb <- empProb( y )
+    nodeProb <- empProb( data[,y] )
     # Design output
     o02      <- list( isLeaf  = "TRUE", 
                       label   = nodeProb$item, 
