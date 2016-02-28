@@ -17,7 +17,8 @@ Right now the function manages to produce RECURSIVELY
 a decision tree based on an input data set and a response 
 variable using an entropy function. The function is inspired by
 a python implementation (Source, at the end of this file). The
-function was checked with a simple data set. 
+function was checked with a simple data set. Probably the data
+used data set should not be to big considering the running time.
 
 FUNCTION EXPLANATION:
 
