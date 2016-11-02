@@ -2,7 +2,7 @@
 
 This repository stores problem sets for my class on applied machine learning. 
 Part of final grading was also a classification competition. The related files can be found
-in the repository [https://github.com/FelixGSE/Riding-free-on-KAGGLE](Riding-free-on-KAGGLE).
+in the repository [Riding-free-on-KAGGLE ](https://github.com/FelixGSE/Riding-free-on-KAGGLE).
 
 ## Content of problem sets
 
@@ -13,7 +13,7 @@ Problem Set 1:
 
 Problem Set 2:
 
-- Shiny app computing and visualising linear discriminants using data from problem set 1 (app runs [https://felixg.shinyapps.io/myapp/](here))
+- Shiny app computing and visualising linear discriminants using data from problem set 1 (app runs [here](https://felixg.shinyapps.io/myapp/))
 
 Problem Set 3:
 
