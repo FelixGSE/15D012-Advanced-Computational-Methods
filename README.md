@@ -6,28 +6,28 @@ in the repository [Riding-free-on-KAGGLE ](https://github.com/FelixGSE/Riding-fr
 
 ## Content of problem sets
 
-Problem Set 1:
+Problem set 1:
 
 - Function to generate a not linear seperable data set
 - Function to create a multivariate normal data set with three classes
 
-Problem Set 2:
+Problem set 2:
 
 - Shiny app computing and visualising linear discriminants using data from problem set 1 (app runs [here](https://felixg.shinyapps.io/myapp/))
 
-Problem Set 3:
+Problem set 3:
 
 - Distributed logistic regression with pyspark on AWS cluster
 
-Problem Set 4:
+Problem set 4:
 
 - K-NN classifier
 
-Problem Set 5:
+Problem set 5:
 
 - Tree classifier
 
-Problem Set 6:
+Problem set 6:
 
 - Ada boost classifier
 
